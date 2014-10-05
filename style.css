@@ -1,0 +1,391 @@
+@font-face
+{
+font-family:myfont;
+src:url(OpenSans-Light.ttf);
+}
+
+
+*,body
+{
+margin:0;
+padding:0;
+font-family:"myfont" tahoma;
+font-size:14px;
+color:#757575;
+}
+
+.container
+{
+	height:auto;
+	width:100%;
+	min-width:320px;
+	background:#fbfbfb;
+	padding-top:55px;
+	position:relative;
+}
+
+.header
+{
+height:50px;
+width:inherit;
+background:#f2f2f2;
+position:fixed;
+top:0;
+left:0 auto;
+line-height:50px;
+font-size:20px;
+text-indent:15px;
+z-index:1;
+border-bottom:1px solid #dcdada;
+box-shadow:0px 0px 5px 0px #d9d7d7;
+}
+
+
+.headerSettings
+{
+	height:40px;
+	width:55px;
+	border-left:1px solid #dcdada;
+	float:right;
+	margin-top:5px;
+}
+
+
+
+
+.line{
+	height:1px;
+	width:90%;
+	margin:10px auto;
+	background:#dcdada;
+}
+
+.clear
+{
+	clear:both;
+}
+
+
+.leftDiv
+{
+	height:auto;
+	width:75%;
+	margin:5px 1.5625%;
+	//background:#666666;
+	float:left;
+}
+
+
+.timeContainer
+{
+	height:60px;
+	width:74.166%; /*240px*/
+	background:#ffffff;
+	margin-bottom:3%;
+	border:1px solid #d7d7d7;
+	position:relative;
+	padding-left:62px;
+	margin:0px auto 3% auto;
+}
+
+
+.day
+{
+	height:60px;
+	width:60px;
+	text-align:center;
+	line-height:60px;
+	font-size:30px;
+	float:left;
+	position:absolute;
+	top:-1px;
+	left:-1px;
+	color:#ffffff;
+}
+
+.time
+{
+	height:30px;
+	width:100%;
+	float:right;
+	color:#333333;
+	text-align:center;
+}
+
+.time1
+{
+	
+	line-height:35px;
+}
+
+.time2
+{
+	
+	line-height:25px;
+}
+
+.rightDiv
+{
+	height:auto;
+	width:21.875%; /*70px*/
+	float:left;
+	margin:5px 0px;
+}
+
+.rightButton
+{
+	height:60px;
+	border:1px solid #fbfbfb;
+	width:100%;
+	margin-bottom:10.2%;
+}
+
+
+.circle
+{
+height:54px;
+width:54px;
+border-radius:50%;
+border:3px solid #ffca67;
+font-size:26px;
+line-height:54px;
+text-align:center;
+font-weight:bold;
+color:#bcbcbc;
+margin:0px auto;
+font-family:"open sans";
+
+}
+
+
+.div1
+{
+	height:100px;
+	width:50%;
+	min-width:300px;
+	font-size:16px;
+	margin:0 auto;
+	
+}
+
+.rtText
+{
+	font-size:16px;
+	text-indent:10px;
+	margin-top:5px;
+	line-height:30px;
+	height:30px;
+	width:auto;
+		
+} 
+
+.rtIndividual
+{
+	height:70px;
+	width:25%;
+	float:left;
+		
+}
+
+.rtImage
+{
+	height:70px;
+	width:65px;
+	float:left;
+	background:#f3f3f3;
+	margin-left:10px;
+}
+
+.rtTime
+{
+	height:50px;
+	width:auto;
+	line-height:60px;
+	text-align:center;
+	font-size:40px;
+	margin:0 auto;
+
+}
+
+.rtmark
+{
+	height:20px;
+	width:auto;
+	line-height:25px;
+	font-size:12px;
+	text-align:center;
+	font-family:"open sans";
+	margin:0 auto;
+
+}
+
+.menuBar
+{
+	height:100px;
+	width:80%;
+	min-width:320px;
+	display:none;
+	margin:15px auto;
+}
+
+.menuButton
+{
+	height:80px;
+	width:25%;
+	float:left;
+	margin:10px 4.067%;
+	
+}
+
+.menuButton img
+{
+	display:block;
+margin:0 auto;
+}
+
+}
+.menuButton img:hover
+{
+	background:#f3f3f3;
+	opacity:0.5;
+}
+
+.messageBox
+{
+	height:auto;
+	max-height:150px;
+	max-width:300px;
+	line-height:50px;
+	text-align:center;
+	background:#373737;
+	z-index:2;
+	color:#ffffff;
+	margin:30% auto;
+	
+}
+
+.msgBgd
+{
+	height:100%;
+	width:inherit;
+	background:#262626;
+	opacity:0.8;
+	position:absolute;
+	top:55px;
+	left:0px;
+	display:none;
+
+}
+
+.groupContainer
+{
+	height:600px;
+	width:320px;
+	display:none;
+	margin:0 auto;
+
+
+}
+
+.groupHeading
+{
+	font-size:24px;
+	text-align:center;
+	color:#b9b8b8;
+	margin:10px 0px;
+
+}
+
+.groupBox
+{
+	height:70px;
+	width:60px;
+	border:3px solid #f2f2f2; 
+	font-size:;
+	line-height:70px;
+	text-align:center;
+	float:left;
+	margin:10px;
+	color:#c8c8c8;
+	font-size:40px;
+}
+
+
+
+.groupBoxContainer
+{
+	height:auto;
+	width:300px;
+	background:#ffffff;
+	padding:0% 9%;
+}
+
+.groupButton
+{
+	height:40px;
+	width:100px;
+	line-height:40px;
+	border:3px solid #cccccc;
+	text-align:center;
+	margin:30px 27px;    /*center*/
+	font-size:20px;
+	color:#b9b8b8;
+	float:left;
+
+}
+
+.settingContainer
+{
+	height:600px;
+	width:320px;
+	display:none;
+	margin:90px auto;
+}
+
+.setting
+{
+	border:1px solid #f0efef;
+	width:300px;
+	height:40px;
+	padding:20px 0px;
+	margin:0 auto;
+
+}
+
+.settingButton
+{
+	height:40px;
+	width:50px;
+	border:3px solid #e6e6e6;
+	float:left;
+	line-height:40px;
+	text-align:center;
+	color:#b9b8b8;
+	font-size:16px;
+
+
+}
+
+.settingText
+{
+	height:40px;
+	float:left;
+	width:170px;
+	line-height:40px;
+	font-size:24px;
+	text-align:center;
+
+}
+
+.settingSave
+{
+	height:40px;
+	width:100px;
+	line-height:40px;
+	color:#b9b8b8;
+	border:3px solid #e6e6e6;
+	text-align:center;
+	margin:30px 27px 30px 27px;
+	font-size:24px;
+	float:left;
+}
