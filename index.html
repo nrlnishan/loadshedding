@@ -1,137 +1,132 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Loadshedding</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="jquery-1.11.1.js"></script>
-	<script src="loadshedding.js"></script>
+    
+    <head>
+        <title>Loadshedding</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="jquery-1.11.1.js"></script>
+        <script src="loadshedding.js"></script>
+        <script>
+            $(document).ready(function() {
 
-	<script>
-	
-	
-	$(document).ready(function(){
-		
-		//for sliding menu bar
-		$(".headerSettings").click(function(){
-			$(".headerSettings").css("background-color","#e6e6e6");
-			$(".menuBar").slideToggle(function(){
-				$(".headerSettings").css("background-color","");
-			});
-		});
+                //for sliding menu bar
+                $(".headerSettings").click(function() {
+                    $(".headerSettings").css("background-color", "#e6e6e6");
+                    $(".menuBar").slideToggle(function() {
+                        $(".headerSettings").css("background-color", "");
+                    });
+                });
 
-		$("#mainPart").click(function(){
-			$(".menuBar").slideUp();
-			});
-		$(".msgBgd").click(function(){
-			$(".msgBgd").hide();
-		});
+                $("#mainPart").click(function() {
+                    $(".menuBar").slideUp();
+                });
 
-		$("#cancel").click(function(){
-			$(".menuBar,.groupContainer,settingContainer,.msgBgd").hide();
-			$(".mainPart").show();
+                $(".msgBgd").click(function() {
+                    $(".msgBgd").hide();
+                });
 
-		});
+                $("#cancel").click(function() {
+                    $(".menuBar,.groupContainer,settingContainer,.msgBgd").hide();
+                    $(".mainPart").show();
 
-		//for selecting the group
-		$("#groupSelect").click(function(){
-			$(".menuBar").slideUp();
-			$("#mainPart,.settingContainer").hide();
-			$(".groupContainer").show();
-			var availability = window.localStorage.getItem("gId");
+                });
 
-			if(availability!="undefined")
-			{
-			var addhighlight = "#"+availability;
-			$(addhighlight).css("border","3px solid #cccccc");
-			}
-		});
+                //for selecting the group
+                $("#groupSelect").click(function() {
+                    $(".menuBar").slideUp();
+                    $("#mainPart,.settingContainer").hide();
+                    $(".groupContainer").show();
+                    var availability = window.localStorage.getItem("gId");
 
-		//for highlighting the group when group is changed
-		$(".groupBox").click(function(){
+                    if (availability != "undefined") {
+                        var addhighlight = "#" + availability;
+                        $(addhighlight).css("border", "3px solid #cccccc");
+                    }
+                });
 
-			newSelected = $(this).attr("id");
+                //for highlighting the group when group is changed
+                $(".groupBox").click(function() {
 
-			addhighlight = "#" + newSelected;
-			$(addhighlight).css("border","3px solid #cccccc");
-			
-			if(previousSelected!=newSelected && previousSelected != 0)
-			{
-				var removeHighlight = "#" + previousSelected;
-				$(removeHighlight).css("border","3px solid #f2f2f2");
-			}
-			previousSelected = newSelected;
-		});
+                    newSelected = $(this).attr("id");
 
-		//for selecting the time format
-		$("#settingSelect").click(function(){
-			$(".menuBar").slideUp();
-			$("#mainPart,.groupContainer").hide();
-			$(".settingContainer").show();
+                    addhighlight = "#" + newSelected;
+                    $(addhighlight).css("border", "3px solid #cccccc");
 
-			var formatAvailability = window.localStorage.getItem("format");
+                    if (previousSelected != newSelected && previousSelected != 0) {
+                        var removeHighlight = "#" + previousSelected;
+                        $(removeHighlight).css("border", "3px solid #f2f2f2");
+                    }
+                    previousSelected = newSelected;
+                });
 
-			if(formatAvailability!="undefined")
-			{
-				var addhighlight = "#" + formatAvailability;
-				$(addhighlight).css("border","3px solid #aeadad");
-			}
+                //for selecting the time format
+                $("#settingSelect").click(function() {
+                    $(".menuBar").slideUp();
+                    $("#mainPart,.groupContainer").hide();
+                    $(".settingContainer").show();
 
-		});
+                    var formatAvailability = window.localStorage.getItem("format");
 
-		
+                    if (formatAvailability != "undefined") {
+                        var addhighlight = "#" + formatAvailability;
+                        $(addhighlight).css("border", "3px solid #aeadad");
+                    }
+
+                });
 
 
-		$(".groupButton").click(function(){
-			$(".groupContainer,.menuBar").hide();
-			$("#mainPart").show();
-		});
-
-		$(".settingSave").click(function(){
-			$(".settingContainer,.menubar").hide();
-			$("#mainPart").show();
-
-		});
-
-		$(".settingButton").click(function(){
-			var selectFormat = $(this).attr("id");
-			currentFormat =selectFormat;
 
 
-			if(selectFormat == timeFormat[0]) //12hr
-			{
-				selectFormat = "#" + timeFormat[0];
-				$(selectFormat).css("border","3px solid #aeadad");
-				var notSelect = "#" + timeFormat[1];
-				$(notSelect).css("border","3px solid #e6e6e6");
-			}
-			if(selectFormat == timeFormat[1]) //24hr
-			{
-				selectFormat = "#" + timeFormat[1];
-				$(selectFormat).css("border","3px solid #aeadad");
-				var notSelect = "#" + timeFormat[0];
-				$(notSelect).css("border","3px solid #e6e6e6");
-			}
-			
-			
-		});
+                $(".groupButton").click(function() {
+                    $(".groupContainer,.menuBar").hide();
+                    $("#mainPart").show();
+                });
 
-		
-		//this part does group highlighting when clicking on circles
-		$(".circle").click(function(){
+                $(".settingSave").click(function() {
+                    $(".settingContainer,.menubar").hide();
+                    $("#mainPart").show();
 
-		newGroupSelect = $(this).attr("id");
-		var highlightGroup = "#" + newGroupSelect;
-		//$(highlightGroup).css("background","#fefefe");
-		$(highlightGroup).css("border","3px solid #fd5427");
+                });
 
-		if(previousGroupSelect!=newGroupSelect && previousGroupSelect!=0)
-			{
-			var rmHighlightGroup = "#" + previousGroupSelect;
-			//$(rmHighlightGroup).css("background","#fbfbfb");
-			$(rmHighlightGroup).css("border","3px solid #ffca67");
-			}
-		previousGroupSelect = newGroupSelect;
-		});
+                $(".settingButton").click(function() {
+                    var selectFormat = $(this).attr("id");
+                    currentFormat = selectFormat;
+
+
+                    if (selectFormat == timeFormat[0]) //12hr
+                    {
+                        selectFormat = "#" + timeFormat[0];
+                        $(selectFormat).css("border", "3px solid #aeadad");
+                        var notSelect = "#" + timeFormat[1];
+                        $(notSelect).css("border", "3px solid #e6e6e6");
+                    }
+                    if (selectFormat == timeFormat[1]) //24hr
+                    {
+                        selectFormat = "#" + timeFormat[1];
+                        $(selectFormat).css("border", "3px solid #aeadad");
+                        var notSelect = "#" + timeFormat[0];
+                        $(notSelect).css("border", "3px solid #e6e6e6");
+                    }
+
+
+                });
+
+
+                //this part does group highlighting when clicking on circles
+                $(".circle").click(function() {
+
+                    newGroupSelect = $(this).attr("id");
+                    var highlightGroup = "#" + newGroupSelect;
+                    //$(highlightGroup).css("background","#fefefe");
+                    $(highlightGroup).css("border", "3px solid #fd5427");
+
+                    if (previousGroupSelect != newGroupSelect && previousGroupSelect != 0) {
+                        var rmHighlightGroup = "#" + previousGroupSelect;
+                        //$(rmHighlightGroup).css("background","#fbfbfb");
+                        $(rmHighlightGroup).css("border", "3px solid #ffca67");
+                    }
+                    previousGroupSelect = newGroupSelect;
+                });
 
 
 
@@ -139,167 +134,145 @@
 
 
 
-	});
+            });
+        </script>
+    </head>
+    
+    <body onload="initialize()">
+        <div class="container">
+            <div class="header">Loadshedding Routine
+                <div class="headerSettings">
+                    <img src="bar1.png" style="float:left;" />
+                </div>
+            </div>
+            <div class="menuBar">
+                <div class="menuButton" id="groupSelect">
+                    <img src="menu1.png" />
+                </div>
+                <div class="menuButton" id="settingSelect">
+                    <img src="menu2.png" />
+                </div>
+                <div class="menuButton" id="updateSelect" onclick="update()">
+                    <img src="menu3.png" />
+                </div>
+                <div class="clear"></div>
+                <div class="line" style="background:#e6e6e6;"></div>
+            </div>
+            <div id="mainPart">
+                <div class="div1">
+                    <!-- Remaining Time Div -->
+                    <div class="rtText">Time Remaining</div>
+                    <div class="rtIndividual">
+                        <div class="rtTime" id="hh"></div>
+                        <div class="rtmark">HOURS</div>
+                    </div>
+                    <div class="rtIndividual">
+                        <div class="rtTime" id="mm"></div>
+                        <div class="rtmark">MINUTES</div>
+                    </div>
+                    <div class="rtIndividual">
+                        <div class="rtTime" id="ss"></div>
+                        <div class="rtmark">SECONDS</div>
+                    </div>
+                    <div class="rtImage" id="rtImage"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="line"></div>
+                <div class="leftDiv">
+                    <div class="timeContainer" id="d0">
+                        <div class="day" style="background:#6dd0f2;border:1px solid #6dd0f2;">S</div>
+                        <div class="time time1" id="r1">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r2">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d1">
+                        <div class="day" style="background:#ff8362;border:1px solid #ff8362;">M</div>
+                        <div class="time time1" id="r3">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r4">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d2">
+                        <div class="day" style="background:#878fa9;border:1px solid #878fa9;">T</div>
+                        <div class="time time1" id="r5">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r6">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d3">
+                        <div class="day" style="background:#7bc8a4;border:1px solid #7bc8a4;">W</div>
+                        <div class="time time1" id="r7">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r8">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d4">
+                        <div class="day" style="background:#cccccc;border:1px solid #cccccc;">Th</div>
+                        <div class="time time1" id="r9">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r10">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d5">
+                        <div class="day" style="background:#fbaf5d;border:1px solid #fbaf5d;">F</div>
+                        <div class="time time1" id="r11">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r12">13:00 AM - 17:00 PM</div>
+                    </div>
+                    <div class="timeContainer" id="d6">
+                        <div class="day" style="background:#666666;border:1px solid #666666;">Sa</div>
+                        <div class="time time1" id="r13">04:00 AM - 08:00 PM</div>
+                        <div class="time time2" id="r14">13:00 AM - 17:00 PM</div>
+                    </div>
+                </div>
+                <div class="rightDiv">
+                    <div class="rightButton">
+                        <div class="circle" id="g1" onclick="display(1)">1</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g2" onclick="display(2)">2</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g3" onclick="display(3)">3</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g4" onclick="display(4)">4</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g5" onclick="display(5)">5</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g6" onclick="display(6)">6</div>
+                    </div>
+                    <div class="rightButton">
+                        <div class="circle" id="g7" onclick="display(7)">7</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- THE MAIN PART EXCEPT MENU BAR -->
+            <div class="groupContainer">
+                <div class="groupHeading">Select Your group</div>
+                <div class="line"></div>
+                <div class="groupBoxContainer">
+                    <div class="groupBox" id="1">1</div>
+                    <div class="groupBox" id="2">2</div>
+                    <div class="groupBox" id="3">3</div>
+                    <div class="groupBox" id="4">4</div>
+                    <div class="groupBox" id="5">5</div>
+                    <div class="groupBox" id="6">6</div>
+                    <div class="groupBox" id="7">7</div>
+                </div>
+                <div class="clear"></div>
+                <div class="groupButton" id="cancel">Cancel</div>
+                <div class="groupButton" onclick="setGroup()">Save</div>
+            </div>
+            <div class="clear"></div>
+            <!-- FOR ALL MESSAGES -->
+            <div class="msgBgd">
+                <div class="messageBox" id="msg1"></div>
+            </div>
+            <div class="settingContainer">
+                <div class="setting">
+                    <div class="clear"></div>
+                    <div class="settingText">Time Format</div>
+                    <div class="settingButton" id="a">12 hr</div>
+                    <div class="settingButton" style="margin-left:5px;" id="b">24 hr</div>
+                </div>
+                <div class="settingSave" id="cancel">Cancel</div>
+                <div class="settingSave" onclick="setFormat()">Save</div>
+            </div>
+        </div>
+    </body>
 
-	</script>
-
-
-
-
-</head>
-<body onload="initialize()">
-<div class="container">
-
-<div class="header">
-Loadshedding Routine
-<div class="headerSettings">
-<img src = "bar1.png" style="float:left;"/>
-</div>
-</div>
-
-<div class="menuBar">
-<div class="menuButton" id="groupSelect"><img src = "menu1-new.png" /></div>
-<div class="menuButton" id="settingSelect"><img src = "menu2-new.png" /></div>
-<div class="menuButton" id="updateSelect" onclick = "update()"><img src = "menu3-new.png" /></div>
-<div class="clear"></div>
-<div class="line" style="background:#e6e6e6;"></div>
-</div>
-
-
-<div id="mainPart">
-
-
-<div class="div1"> <!-- Remaining Time Div -->
-<div class="rtText">Time Remaining</div>
-<div class="rtIndividual">
-<div class="rtTime" id="hh"></div>
-<div class="rtmark">HOURS</div>
-</div>
-<div class="rtIndividual" >
-<div class="rtTime" id="mm"></div>
-<div class="rtmark">MINUTES</div>
-</div>
-<div class="rtIndividual" >
-<div class="rtTime" id="ss"></div>
-<div class="rtmark">SECONDS</div>
-</div>
-<div class="rtImage" id="rtImage">
-</div>
-</div>
-
-<div class="clear"></div>
-<div class="line"></div>
-<div class="leftDiv">
-
-<div class="timeContainer" id="d0">
-<div class="day" style="background:#6dd0f2;border:1px solid #6dd0f2;">S</div>
-<div class="time time1" id="r1">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r2">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d1">
-<div class="day" style="background:#ff8362;border:1px solid #ff8362;">M</div>
-<div class="time time1" id="r3">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r4">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d2">
-<div class="day" style="background:#878fa9;border:1px solid #878fa9;">T</div>
-<div class="time time1" id="r5">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r6">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d3">
-<div class="day" style="background:#7bc8a4;border:1px solid #7bc8a4;">W</div>
-<div class="time time1" id="r7">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r8">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d4">
-<div class="day" style="background:#cccccc;border:1px solid #cccccc;">Th</div>
-<div class="time time1" id="r9">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r10">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d5">
-<div class="day" style="background:#fbaf5d;border:1px solid #fbaf5d;">F</div>
-<div class="time time1" id="r11">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r12">13:00 AM - 17:00 PM</div>
-</div>
-
-<div class="timeContainer" id="d6">
-<div class="day" style="background:#666666;border:1px solid #666666;">Sa</div>
-<div class="time time1" id="r13">04:00 AM - 08:00 PM</div>
-<div class="time time2" id="r14">13:00 AM - 17:00 PM</div>
-</div>
-
-</div>
-
-<div class="rightDiv">
-	<div class="rightButton">
-		<div class="circle" id="g1" onclick="display(1)">1</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g2" onclick="display(2)">2</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g3" onclick="display(3)">3</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g4" onclick="display(4)">4</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g5" onclick="display(5)">5</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g6" onclick="display(6)">6</div>
-	</div>
-	<div class="rightButton">
-		<div class="circle" id="g7" onclick="display(7)">7</div>
-	</div>
-</div>
-<div class="clear"></div>
-
-
-</div> <!-- THE MAIN PART EXCEPT MENU BAR -->
-
-<div class="groupContainer">
-	<div class="groupHeading">Select Your group</div>
-	<div class="line"></div>
-<div class="groupBoxContainer">
-	<div class="groupBox" id="1">1</div>
-	<div class="groupBox" id="2">2</div>
-	<div class="groupBox" id="3">3</div>
-	<div class="groupBox" id="4">4</div>
-	<div class="groupBox" id="5">5</div>
-	<div class="groupBox" id="6">6</div>
-	<div class="groupBox" id="7">7</div>
-</div>
-<div class="clear"></div>
-<div class="groupButton" id="cancel">Cancel</div>
-<div class="groupButton" onclick = "setGroup()">Save</div>
-
-</div>
-
-<div class="clear"></div>
-
-<!-- FOR ALL MESSAGES -->
-<div class="msgBgd">
-<div class="messageBox" id="msg1"></div>
-</div>
-
-<div class="settingContainer">
-	<div class="setting">
-		<div class="clear"></div>
-		<div class="settingText">Time Format</div>
-		<div class="settingButton" id="a">12 hr</div>
-		<div class="settingButton" style="margin-left:5px;" id="b">24 hr</div>
-	</div>
-	<div class="settingSave" id="cancel">Cancel</div>
-	<div class="settingSave" onclick="setFormat()">Save</div>
-
-</div>
-
-</div>
-	</body>
-	</html>
+</html>

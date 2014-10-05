@@ -1,18 +1,18 @@
 //loadshedding.js
 var routine = new Array();
-var currentFormat = "b";        //default =>24 hr
+var currentFormat = "b"; //default =>24 hr
 var currentGroup = "";
 
 
 
-var sint;       //for the setInterval method
+var sint; //for the setInterval method
 var td = new Date();
-var status;     //to find the correct time of loadshedding
+var status; //to find the correct time of loadshedding
 var previousSelected = 0;
 var newSelected = 0;
 var previousGroupSelect = 0;
 var newGroupSelect = "";
-var timeFormat = ["a","b"];
+var timeFormat = ["a", "b"];
 var newRoutine = new Array();
 
 /*Sample Routine*/
@@ -27,7 +27,7 @@ routine.push("11:00 AM - 16:00 PM", "19:30 PM - 24:00 PM", "10:00 AM - 15:00 PM"
 
 
 function initialize() {
-    $(".circle").css("border","3px solid #ffca67");
+    $(".circle").css("border", "3px solid #ffca67");
 
     if (typeof (Storage) === "undefined") //if not compatible
     {
@@ -36,23 +36,23 @@ function initialize() {
     } else {
 
         if (typeof (window.localStorage.gId) == "undefined") { //for first time
-                   
-            window.localStorage.setItem("gId",4);
-            window.localStorage.setItem("uNo",0);
-            window.localStorage.setItem("format",currentFormat);
+
+            window.localStorage.setItem("gId", 4);
+            window.localStorage.setItem("uNo", 0);
+            window.localStorage.setItem("format", currentFormat);
             setRoutine(routine);
             display(4);
 
             $(".msgBgd").show();
             $("#msg1").text("Your Loadshedding Schedule is ready! Now please select your group");
 
-            
+
         } else {
             var myId = window.localStorage.getItem("gId");
             var tc = td.getDay();
             var selectDay = "d" + tc;
             currentGroup = "g" + myId;
-            document.getElementById(currentGroup).style.border="3px solid #fd5427";
+            document.getElementById(currentGroup).style.border = "3px solid #fd5427";
             document.getElementById(selectDay).style.background = "#f2f2f2";
             display(myId);
             //alert($(".rightDiv").css("height"));
@@ -67,11 +67,11 @@ function initialize() {
 
 function setGroup() {
     //group is set as 1,2,3,4...
-    currentGroup = (newSelected==0)?window.localStorage.getItem("gId"):newSelected;
+    currentGroup = (newSelected == 0) ? window.localStorage.getItem("gId") : newSelected;
 
-    
 
-    window.localStorage.setItem("gId",currentGroup);
+
+    window.localStorage.setItem("gId", currentGroup);
 
     $(".msgBgd").show();
     $("#msg1").text("Your Group is updated! Your New group is " + currentGroup);
@@ -80,10 +80,9 @@ function setGroup() {
 }
 
 
-function setFormat()
-{
-    window.localStorage.setItem("format",currentFormat);
-    var tmf = (currentFormat == "a")?"12-Hour":"24-Hour";
+function setFormat() {
+    window.localStorage.setItem("format", currentFormat);
+    var tmf = (currentFormat == "a") ? "12-Hour" : "24-Hour";
     $(".msgBgd").show();
     $("#msg1").text("You have selected " + tmf + " time format!");
 
@@ -100,12 +99,12 @@ function display(id) {
     currentFormat = window.localStorage.getItem("format");
     var result1 = new Array();
 
-    id="g"+id;
+    id = "g" + id;
     var result = new Array();
     result = window.localStorage.getItem(id);
     result = result.split(";");
 
-    var result1=changeTimeFormat(currentFormat,result);
+    var result1 = changeTimeFormat(currentFormat, result);
 
     document.getElementById("r1").innerHTML = result1[0];
     document.getElementById("r2").innerHTML = result1[1];
@@ -128,39 +127,34 @@ function display(id) {
 
 }
 
-function changeTimeFormat(t,rr)
-{
-               
-    if(t=="b")
-    {
+function changeTimeFormat(t, rr) {
+
+    if (t == "b") {
 
         return rr;
 
-    }
-    else
-    {
-        newRoutine.length=0;
-        for(var i=0;i<14;i++)
-        {
+    } else {
+        newRoutine.length = 0;
+        for (var i = 0; i < 14; i++) {
             //brings the hour part
-            var part1 = parseInt(rr[i].substr(0,2)); 
-            var part2 = parseInt(rr[i].substr(11,2));
+            var part1 = parseInt(rr[i].substr(0, 2));
+            var part2 = parseInt(rr[i].substr(11, 2));
 
             //process if the number is greater than 12
-            var newPart1=(part1>12)?part1-12:part1;
-            var newPart2=(part2>12)?part2-12:part2;
+            var newPart1 = (part1 > 12) ? part1 - 12 : part1;
+            var newPart2 = (part2 > 12) ? part2 - 12 : part2;
 
             //add the padding 0 and changing into string
-            newPart1=addZero(newPart1);
-            newPart2=addZero(newPart2);
-            part1=addZero(part1);
-            part2=addZero(part2);
+            newPart1 = addZero(newPart1);
+            newPart2 = addZero(newPart2);
+            part1 = addZero(part1);
+            part2 = addZero(part2);
 
             //now replacing time format in the previous routine
-            rr[i]=rr[i].replace(part1,newPart1);
-            rr[i]=rr[i].replace(part2,newPart2);
+            rr[i] = rr[i].replace(part1, newPart1);
+            rr[i] = rr[i].replace(part2, newPart2);
 
-            
+
 
             //then storing the final routine in new array
             newRoutine.push(rr[i]);
@@ -246,34 +240,31 @@ function remainingTime(nData) {
         e_time = nData[4];
     }
 
-	status=i;
-	
-	if(status==0||status==2||status==4)
-	{
-	document.getElementById("rtImage").style.background="url('light-on-gray.png')";
-	}
-	else
-	{
-	document.getElementById("rtImage").style.background="url('light-off-gray.png')";
-	}
-	
-	
-	var eh = e_time.substr(0, 2);
+    status = i;
+
+    if (status == 0 || status == 2 || status == 4) {
+        document.getElementById("rtImage").style.background = "url('light-on-gray.png')";
+    } else {
+        document.getElementById("rtImage").style.background = "url('light-off-gray.png')";
+    }
+
+
+    var eh = e_time.substr(0, 2);
     var em = e_time.substr(3, 2);
     eh = parseInt(eh);
     em = parseInt(em);
 
-	sint = setInterval(function () {
-        display_rmtime(eh,em)}, 500);
-	
-	
+    sint = setInterval(function () {
+        display_rmtime(eh, em)
+    }, 500);
+
+
 }
 
 
-function display_rmtime(eh,em)
-{
-//this function continuously displays the remaining time
-var d = new Date();
+function display_rmtime(eh, em) {
+    //this function continuously displays the remaining time
+    var d = new Date();
     var s_hrs = d.getHours();
     var s_min = d.getMinutes();
     var s_sec = d.getSeconds();
@@ -283,19 +274,16 @@ var d = new Date();
     var md = 0;
     var sd = 0;
 
-    if ((eh > s_hrs)) 
-    {
+    if ((eh > s_hrs)) {
         hd = eh - s_hrs;
         md = em - s_min;
         sd = 60 - s_sec;
         if (md < 0) {
             md = md + 60;
             hd = hd - 1;
-            
+
         }
-    } 
-    else if (eh < s_hrs) 
-    {
+    } else if (eh < s_hrs) {
         hd = eh - s_hrs;
         md = em - s_min;
         hd = hd + 24;
@@ -303,25 +291,19 @@ var d = new Date();
         if (md < 0) {
             md = md + 60;
             hd = hd - 1;
-            
+
         }
-    } 
-    else if (eh == s_hrs && em == s_min) 
-    {
+    } else if (eh == s_hrs && em == s_min) {
         hd = 0;
         md = 0;
         sd = 60 - s_sec;
-        if(sd == 0)
-        {
-        initialize();
+        if (sd == 0) {
+            initialize();
         }
-    
-    } 
-    else if (eh == s_hrs ) 
-    {
-        if(em<s_min)
-        {
-        initialize();
+
+    } else if (eh == s_hrs) {
+        if (em < s_min) {
+            initialize();
         }
 
         if (em >= s_min) {
@@ -330,30 +312,28 @@ var d = new Date();
             sd = 60 - s_sec;
         }
 
-        
 
-    } 
-    else return;
+
+    } else return;
 
     document.getElementById("hh").innerHTML = addZero(hd);
     document.getElementById("mm").innerHTML = addZero(md);
     document.getElementById("ss").innerHTML = addZero(sd);
 
-    
+
 }
 
-function addZero(inp)
-    {
-        var ret = new String("00" + inp).slice(-2);
-        return ret;
-     
-    }
+function addZero(inp) {
+    var ret = new String("00" + inp).slice(-2);
+    return ret;
+
+}
 
 
 
 
 
-function setRoutine(routine) {              //rRoutine=Received updated Routine
+function setRoutine(routine) { //rRoutine=Received updated Routine
 
     var itemId = new Array("g1", "g2", "g3", "g4", "g5", "g6", "g7");
     try {
@@ -382,7 +362,7 @@ function setRoutine(routine) {              //rRoutine=Received updated Routine
 function update() {
     $(".msgBgd").show();
     $("#msg1").text("Updating...");
-    
+
     var url = 'https://dl.dropboxusercontent.com/s/qohju6dt8caustn/routine.json';
     $.ajax({
         url: url,
@@ -404,14 +384,14 @@ function update() {
                     nRt.push(data.routine[i].s1, data.routine[i].s2, data.routine[i].m1, data.routine[i].m2, data.routine[i].t1, data.routine[i].t2, data.routine[i].w1, data.routine[i].w2, data.routine[i].th1, data.routine[i].th2, data.routine[i].f1, data.routine[i].f2, data.routine[i].sa1, data.routine[i].sa2);
                 }
                 setRoutine(nRt);
-                
+
                 //if the routine is update successfully
                 $(".menuBar").slideUp();
                 $(".msgBgd").show();
                 $("#msg1").text("Your Schedule is updated");
 
 
-				initialize(); //initializing once again
+                initialize(); //initializing once again
 
             } else {
                 $(".menuBar").slideUp();
@@ -422,8 +402,8 @@ function update() {
         },
 
         error: function (xhr, status, errorThrown) {
-          $(".msgBgd").show();
-           $("#msg1").text("Sorry! Could not update this time! Try again later!");
+            $(".msgBgd").show();
+            $("#msg1").text("Sorry! Could not update this time! Try again later!");
         }
 
     });
