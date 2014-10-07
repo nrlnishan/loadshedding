@@ -111,24 +111,16 @@ function display(id) {
 
     id = "g" + id;
 
-
     result = window.localStorage.getItem(id);
     result = result.split(";");
+    /*
+    variable used so the result is not referenced, and changes are not made to result*/
 
-    //used as:copying the variables::not referencing the same variable "result"
     var rr = window.localStorage.getItem(id);
     rr = rr.split(";");
 
-
-
-
-
-
-    //changing the timeformat for display
+       //changing the timeformat for display
     result1 = changeTimeFormat(currentFormat, rr);
-
-
-
 
     document.getElementById("r1").innerHTML = result1[0];
     document.getElementById("r2").innerHTML = result1[1];
