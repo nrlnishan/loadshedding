@@ -27,7 +27,10 @@ routine.push("11:00 AM - 16:00 PM", "19:30 PM - 24:00 PM", "10:00 AM - 15:00 PM"
 
 
 function initialize() {
+
+
     $(".circle").css("border", "3px solid #ffca67");
+
 
     if (typeof (Storage) === "undefined") //if not compatible
     {
@@ -37,6 +40,7 @@ function initialize() {
 
         if (typeof (window.localStorage.gId) == "undefined") { //for first time
 
+
             window.localStorage.setItem("gId", 4);
             window.localStorage.setItem("uNo", 0);
             window.localStorage.setItem("format", currentFormat);
@@ -44,18 +48,22 @@ function initialize() {
             display(4);
 
             $(".msgBgd").show();
-            $("#msg1").text("Your Loadshedding Schedule is ready! Now please select your group");
+            $("#msg1").text("Your app is ready!Please Select your group");
 
 
         } else {
+
             var myId = window.localStorage.getItem("gId");
             var tc = td.getDay();
             var selectDay = "d" + tc;
             currentGroup = "g" + myId;
-            document.getElementById(currentGroup).style.border = "3px solid #fd5427";
+            previousGroupSelect = currentGroup;
+            //highlighting the circle
+            document.getElementById(previousGroupSelect).style.border = "3px solid #fd5427";
+            //highlighting the routine
             document.getElementById(selectDay).style.background = "#f2f2f2";
+
             display(myId);
-            //alert($(".rightDiv").css("height"));
 
 
 
@@ -69,8 +77,6 @@ function setGroup() {
     //group is set as 1,2,3,4...
     currentGroup = (newSelected == 0) ? window.localStorage.getItem("gId") : newSelected;
 
-
-
     window.localStorage.setItem("gId", currentGroup);
 
     $(".msgBgd").show();
@@ -81,6 +87,7 @@ function setGroup() {
 
 
 function setFormat() {
+
     window.localStorage.setItem("format", currentFormat);
     var tmf = (currentFormat == "a") ? "12-Hour" : "24-Hour";
     $(".msgBgd").show();
@@ -97,14 +104,31 @@ function setFormat() {
 function display(id) {
 
     currentFormat = window.localStorage.getItem("format");
-    var result1 = new Array();
+
+    var result = new Array(); //used for computing remaining time
+    var result1 = new Array(); //used for displaying time according to format
+
 
     id = "g" + id;
-    var result = new Array();
+
+
     result = window.localStorage.getItem(id);
     result = result.split(";");
 
-    var result1 = changeTimeFormat(currentFormat, result);
+    //used as:copying the variables::not referencing the same variable "result"
+    var rr = window.localStorage.getItem(id);
+    rr = rr.split(";");
+
+
+
+
+
+
+    //changing the timeformat for display
+    result1 = changeTimeFormat(currentFormat, rr);
+
+
+
 
     document.getElementById("r1").innerHTML = result1[0];
     document.getElementById("r2").innerHTML = result1[1];
@@ -131,9 +155,12 @@ function changeTimeFormat(t, rr) {
 
     if (t == "b") {
 
+
         return rr;
 
     } else {
+
+
         newRoutine.length = 0;
         for (var i = 0; i < 14; i++) {
             //brings the hour part
@@ -241,6 +268,7 @@ function remainingTime(nData) {
     }
 
     status = i;
+    //console.log(status);
 
     if (status == 0 || status == 2 || status == 4) {
         document.getElementById("rtImage").style.background = "url('light-on-gray.png')";
